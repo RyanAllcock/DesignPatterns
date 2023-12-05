@@ -37,17 +37,23 @@ struct ShapeCreator{ // non-abstract factory
 };
 
 int main(int argc, char *argv[]){
+	
+	// argument input
 	for(int i = 2; i < argc; i += 2){
 		Shape *shape = ShapeCreator::make((char)argv[i - 1][0], atof(argv[i]));
 		printf("Input shape %i area: %f, perimeter: %f\n", i / 2, shape->getArea(), shape->perimeter);
 		delete shape;
 	}
 	
+	// initialisation
 	Shape *shape1, *shape2;
 	shape1 = ShapeCreator::make('c', 1.5f);
 	shape2 = ShapeCreator::make('s', 3);
+	
+	// client usage
 	printf("Shape 1 area: %f, perimeter: %f\n", shape1->getArea(), shape1->perimeter);
 	printf("Shape 2 area: %f, perimeter: %f\n", shape2->getArea(), shape2->perimeter);
+	
 	delete shape1;
 	delete shape2;
 	return 0;

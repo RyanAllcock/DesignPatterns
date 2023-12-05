@@ -27,6 +27,8 @@ struct DirectorNumber{ // abstract composer
 };
 
 int main(int argc, char *argv[]){
+	
+	// argument input
 	for(int i = 2; i < argc; i += 2){
 		char build = (char)argv[i - 1][0];
 		int value = atoi(argv[i]);
@@ -43,14 +45,16 @@ int main(int argc, char *argv[]){
 		delete builder;
 	}
 	
-	// client operations
+	// initialisation
 	int value = 10;
 	BuilderNumber *builder = new BuilderMultiply();
 	DirectorNumber *director = new DirectorNumber(value);
+	
+	// client usage
 	int output = director->construct(builder);
 	printf("Value %i produced %i\n", value, output);
+	
 	delete director;
 	delete builder;
-	
 	return 0;
 }

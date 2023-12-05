@@ -1,9 +1,6 @@
 #include <stdio.h> // command line output
 #include <list> // component storage
 
-// WIP : concept: hierarchy of objects, calling top objects involves calling all lower objects, all lower objects perform the same function
-// e.g. hierarchy of pc components -> each component has a price -> calling price collects price from all lower objects
-
 struct Water{ // component base class
 	virtual void flow(float w) = 0;
 };
@@ -32,6 +29,8 @@ struct Ocean : Water{ // leaf 2
 };
 
 int main(int argc, char *argv[]){
+	
+	// initialisation
 	River *tributary = new River();
 	River *delta = new River();
 	Reservoir *pond = new Reservoir();
@@ -39,7 +38,14 @@ int main(int argc, char *argv[]){
 	tributary->add(pond);
 	tributary->add(delta);
 	delta->add(sea);
+	
+	// client usage
 	tributary->flow(10);
 	delta->flow(5);
+	
+	delete tributary;
+	delete delta;
+	delete pond;
+	delete sea;
 	return 0;
 }

@@ -1,14 +1,9 @@
-#include <stdio.h> // command line output
-#include <string.h> // message navigation
+#include <iostream> // command line output
+#include <string> // message navigation
 
 struct Messenger{ // base class
-	virtual char* send(char *msg){
-		const char *msgAdd = "Message sent: ";
-		int msgSize = strlen(msgAdd);
-		for(int c = 0; c < msgSize; c++){
-			msg[c + msgSize] = msg[c];
-			msg[c] = msgAdd[c];
-		}
+	virtual std::string send(std::string msg){
+		msg.insert(0, "Message sent: ");
 		return msg;
 	}
 };
@@ -21,8 +16,8 @@ struct MessageEncoder : Messenger{ // decorator class
 
 struct MessageCaesar : MessageEncoder{ // decorator 1
 	MessageCaesar(Messenger *m) : MessageEncoder(m) {}
-	char* send(char *msg){ // converts incoming data
-		for(int c = 0; msg[c] != '\0'; c++)
+	std::string send(std::string msg){ // converts incoming data
+		for(int c = 0; c < msg.size(); c++)
 			msg[c] = (char)((int)((msg[c] - 'a') - 3) % 26) + 'a';
 		return get()->send(msg);
 	}
@@ -31,8 +26,8 @@ struct MessageCaesar : MessageEncoder{ // decorator 1
 struct MessageMono : MessageEncoder{ // decorator 2
 	const char *code;
 	MessageMono(Messenger *m, const char *c) : MessageEncoder(m) { code = c; }
-	char* send(char *msg){ // converts using passed information
-		for(int c = 0; msg[c] != '\0'; c++)
+	std::string send(std::string msg){ // converts using passed information
+		for(int c = 0; c < msg.size(); c++)
 			msg[c] = code[(int)(msg[c] - 'a')];
 		return get()->send(msg);
 	}
@@ -41,15 +36,10 @@ struct MessageMono : MessageEncoder{ // decorator 2
 struct MessageName : MessageEncoder{ // decorator 3
 	const char *name;
 	MessageName(Messenger *m, const char *n) : MessageEncoder(m) { name = n; }
-	char* send(char *msg){ // processes data in different decorating order
-		get()->send(msg);
-		const char *msgAdd = ": Sent by ";
-		int oldSize = strlen(msg);
-		int msgSize = strlen(msgAdd);
-		int nameSize = strlen(name);
-		for(int c = 0; c < msgSize; c++) msg[c + oldSize] = msgAdd[c];
-		for(int c = 0; c < nameSize; c++) msg[c + oldSize + msgSize] = name[c];
-		msg[oldSize + msgSize + nameSize] = '\0';
+	std::string send(std::string msg){ // processes data in different decorating order
+		msg = get()->send(msg);
+		msg.append(": Sent by ");
+		msg.append(name);
 		return msg;
 	}
 };
@@ -59,10 +49,10 @@ int main(int argc, char *argv[]){
 	const char *code = "qwertyuiopasdfghjklzxcvbnm";
 	const char *name = "the sender";
 	Messenger *encoder = new MessageName(new MessageMono(new MessageCaesar(messenger), code), name);
-	char msg1[30] = "hello";
-	printf("%s\n", messenger->send((char*)&msg1));
-	char msg2[30] = "hello";
-	printf("%s\n", encoder->send((char*)&msg2));
+	std::string msg1 = "hello";
+	std::cout << messenger->send(msg1) << "\n";
+	std::string msg2 = "hello";
+	std::cout << encoder->send(msg2) << "\n";
 	return 0;
 }
 

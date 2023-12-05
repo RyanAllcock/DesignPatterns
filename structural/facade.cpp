@@ -29,7 +29,6 @@ struct Barista{ // facade
 	Cafetiere cafe;
 	Kettle kettle;
 	MilkFrother frother;
-	// Cupboard storage;
 	void cappuccino(const char *b, const char *m){
 		cafe.bean = b;
 		cafe.load(2);
@@ -96,13 +95,12 @@ struct Barista{ // facade
 };
 
 int main(int argc, char *argv[]){
-	Barista *barista = new Barista();
-	barista->cappuccino("Starbucks", "cow");
-	barista->black("Costa", 2);
-	barista->americano("Dunkin Donuts", "distilled");
-	barista->flatWhite("McCafe", "coconut");
-	barista->latte("Tim Hortons", "soy");
-	barista->instant("Nescafe", "tap");
-	delete barista;
+	Barista barista;
+	barista.cappuccino("Starbucks", "cow");
+	barista.black("Costa", 2);
+	barista.americano("Dunkin Donuts", "distilled");
+	barista.flatWhite("McCafe", "coconut");
+	barista.latte("Tim Hortons", "soy");
+	barista.instant("Nescafe", "tap");
 	return 0;
 }

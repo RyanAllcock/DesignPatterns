@@ -75,9 +75,13 @@ struct CreatorSharp : CreatorShape{ // concrete factory 2
 
 int main(int argc, char *argv[]){
 	for(int i = 3; i < argc; i += 3){
+		
+		// argument input
 		char typeCreator = (char)argv[i - 2][0];
 		char typeProduct = atoi(argv[i - 1]);
 		float value = atof(argv[i]);
+		
+		// initialisation
 		CreatorShape *creator = NULL;
 		switch(typeCreator){ // determine concrete factory
 			case 'r': creator = new CreatorRound(); break;
@@ -90,7 +94,10 @@ int main(int argc, char *argv[]){
 			case 2: shape = creator->makeLong(value, value / 2.f); break;
 			default: shape = creator->makeEquil(1); break;
 		}
+		
+		// client usage
 		printf("Input shape %i area: %f, perimeter: %f\n", i / 3, shape->getArea(), shape->perimeter);
+		
 		delete creator;
 		delete shape;
 	}

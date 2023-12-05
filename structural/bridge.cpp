@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
 		
 	}
 	
-	// usage
+	// client usage
 	const char *time;
 	const char *fit = currentTool->pilot(timeToDo, &time);
 	const char *condition = currentTool->join(brittleness);

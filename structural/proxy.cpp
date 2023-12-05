@@ -25,7 +25,7 @@ struct Keeper : Library{ // proxy
 	}
 };
 
-int main(int argc, char *argv[]){ // client
+int main(int argc, char *argv[]){ // client usage
 	Library *library = new Shelf(); // normal access
 	printf("Fetching %s book from shelf: %s\n", "science", library->fetchBookByTopic("science"));
 	printf("Fetching %s book from shelf: %s\n", "secret plans", library->fetchBookByTopic("secret plans"));
