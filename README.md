@@ -1,11 +1,11 @@
-#Design Patterns: (https://en.wikipedia.org/wiki/Design_Patterns)
+# Design Patterns: (https://en.wikipedia.org/wiki/Design_Patterns)
 - Also called the "Gang of Four" design patterns
 - Formally represent common programming constructs, to enhance design consistency for object-oriented codebases
 - A subset of the software design patterns list (https://en.wikipedia.org/wiki/Software_design_pattern)
 - Others added later: extension interface, dependency injection, type-object, null object
 - Other design patterns/principles include SOLID, DRY, GRASP and IDEALS
 
-##Creational Patterns:
+## Creational Patterns:
 - factory: builds object components called products using a factory
 - abstract factory: builds object products based on factory themes
 - builder: assembles objects from a list of components using a director, each built using the provided builder
@@ -13,7 +13,7 @@
 - prototype deep copy: existing object instance cloning into separate references
 - singleton: one global object instance, able to be referenced from anywhere
 
-##Structural Patterns:
+## Structural Patterns:
 - adapter: interfaces an outdated object by adapting new methods from it's original methods into a wrapper, so a client can straightforwardly use the object
 - decorator: wraps the methods of an object with additional & optional functionality
 - facade: object's methods opaquely operate on more complex internal objects, to abstract complex internal functionality
@@ -22,7 +22,7 @@
 - flyweight: store flyweights in factory, dynamically add new ones by key or present ones implicitly, concrete flyweights overload operations by context
 - proxy: store an object inside a wrapper of a common interface, which maintains an ulterior objective as the client indirectly accesses functionality
 
-##Behavioural Patterns:
+## Behavioural Patterns:
 - chain of responsibility: chain sub-operations on an object, using a sequence of loosely-coupled handlers which receive the object then pass it along
 - command: encapsulate operations on a referenced object using command objects, so a client can store commands to be executed on a retriever at any time
 - mediator: components/colleagues communicate events with each other indirectly, by notifying a central mediator which holds shared data and states
